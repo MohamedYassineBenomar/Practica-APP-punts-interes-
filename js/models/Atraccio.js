@@ -1,10 +1,10 @@
 import { PuntInteres } from "./PuntInteres.js";
 import { IVA } from "../const/constants.js";
 
-// Edat a partir de la qual el contingut no és apte per a tot el públic
+// Minimum age above which the content is considered adults-only
 const EDAT_ADULT = 18;
 
-// Atracció (parc, espectacle...) que hereta de PuntInteres
+// Attraction (theme park, show...) — inherits from PuntInteres
 export class Atraccio extends PuntInteres {
   #horaris;
   #preu;
@@ -36,7 +36,7 @@ export class Atraccio extends PuntInteres {
     return this.#moneda;
   }
 
-  // Calcula el preu amb IVA segons el codi del país
+  // Returns the price applying VAT (if defined for the country)
   preuIva() {
     if (this.#preu === 0) {
       return "Entrada gratuïta";
@@ -47,12 +47,12 @@ export class Atraccio extends PuntInteres {
       const preuFormat = preuAmbIva.toFixed(2).replace(".", ",");
       return `${preuFormat}${this.#moneda} (IVA)`;
     }
-    // Si no hi ha IVA definit, retornem el preu sense IVA
+    // No VAT defined for this country: return the raw price
     const preuFormat = this.#preu.toFixed(2).replace(".", ",");
     return `${preuFormat}${this.#moneda} (no IVA)`;
   }
 
-  // Indica si el contingut és apte per a tot el públic
+  // Indicates whether the attraction is suitable for all audiences
   esApteTotPublic() {
     if (Number.isNaN(this.#edat)) {
       return true;

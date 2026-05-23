@@ -2,10 +2,10 @@ import { Atraccio } from "../models/Atraccio.js";
 import { Museu } from "../models/Museu.js";
 import { Espai } from "../models/Espai.js";
 
-// Generador de fragments del DOM. Mai no fem servir innerHTML per
-// construir elements: tot es crea amb createElement i textContent.
+// DOM fragment factory. innerHTML is never used to build elements:
+// everything is created with createElement + textContent.
 export class Components {
-  // Crea un element genèric amb classes i text opcional
+  // Creates a generic element with optional classes and text content
   static crearElement(tag, classes = [], text = "") {
     const element = document.createElement(tag);
     classes.forEach((cls) => element.classList.add(cls));
@@ -15,12 +15,12 @@ export class Components {
     return element;
   }
 
-  // Crea la targeta visual per a un punt d'interès
-  // callbackEliminar es crida quan l'usuari prem el botó de suprimir
+  // Builds the visual card for a single point of interest.
+  // callbackEliminar is invoked when the user clicks the delete button.
   static crearTargetaPunt(punt, callbackEliminar) {
     const item = Components.crearElement("article", ["punt-item", punt.tipus]);
 
-    // Capçalera amb el nom i el botó d'eliminar
+    // Header with the name and the delete button
     const capcalera = Components.crearElement("div", ["punt-capcalera"]);
     const titol = Components.crearElement("h3", ["punt-titol"], punt.nom);
     const btnEliminar = Components.crearElement("button", ["btn-eliminar"], "✕");
@@ -30,13 +30,13 @@ export class Components {
     capcalera.appendChild(btnEliminar);
     item.appendChild(capcalera);
 
-    // Direcció i puntuació (comuns a tots els tipus)
+    // Address and rating (shared by every type)
     const direccio = Components.crearElement("p", ["punt-direccio"], punt.direccio);
     item.appendChild(direccio);
     const puntuacio = Components.crearElement("p", ["punt-puntuacio"], `Puntuació: ${punt.puntuacio}`);
     item.appendChild(puntuacio);
 
-    // Bloc d'informació depenent del tipus concret de punt
+    // Info block that depends on the concrete subclass
     const info = Components.crearElement("div", ["punt-info"]);
     if (punt instanceof Atraccio) {
       info.appendChild(Components.crearElement("span", ["info-tag", "tag-tipus"], "Atracció"));
@@ -57,17 +57,17 @@ export class Components {
     return item;
   }
 
-  // Omple un select amb els tipus rebuts (un Set) més l'opció "Tots"
+  // Fills a <select> with the given types (a Set) plus the default "Tots" option
   static omplirSelectTipus(selectObj, tipusSet) {
-    // Buidem totes les opcions actuals
+    // Wipe the current options first
     while (selectObj.firstChild) {
       selectObj.removeChild(selectObj.firstChild);
     }
-    // Opció per defecte: tots
+    // Default option: all types
     const opcioTots = Components.crearElement("option", [], "Tots");
     opcioTots.value = "tots";
     selectObj.appendChild(opcioTots);
-    // Una opció per cada tipus detectat al CSV
+    // One option per type detected in the CSV
     tipusSet.forEach((tipus) => {
       const opcio = Components.crearElement("option", [], Components.#capitalitzar(tipus));
       opcio.value = tipus;
@@ -75,7 +75,7 @@ export class Components {
     });
   }
 
-  // Crea el bloc de la capçalera amb la bandera i la ciutat
+  // Builds the header block with the flag and the city name
   static crearInfoPais(urlBandera, alt, ciutat) {
     const contenidor = Components.crearElement("div", ["info-pais"]);
     if (urlBandera !== "") {
@@ -89,7 +89,7 @@ export class Components {
     return contenidor;
   }
 
-  // Posa la primera lletra en majúscula (per mostrar el tipus al select)
+  // Uppercases the first letter (used to display types in the select)
   static #capitalitzar(text) {
     if (text.length === 0) {
       return text;

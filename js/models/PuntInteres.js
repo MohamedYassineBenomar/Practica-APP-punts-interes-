@@ -1,7 +1,7 @@
-// Classe base per a qualsevol punt d'interès
-// Encapsula els atributs comuns: identificador, ubicació, nom, etc.
+// Base class for any point of interest.
+// Encapsulates the common attributes: id, location, name, etc.
 export class PuntInteres {
-  // Atributs privats
+  // Private attributes
   #id;
   #pais;
   #codi;
@@ -13,11 +13,11 @@ export class PuntInteres {
   #longitud;
   #puntuacio;
 
-  // Comptador estàtic d'instàncies creades
+  // Static counter of created instances
   static totalPuntsInteres = 0;
 
   constructor(pais, codi, ciutat, nom, direccio, tipus, latitud, longitud, puntuacio) {
-    // Assignem un id incremental basat en el comptador estàtic
+    // Assign an incremental id from the static counter
     PuntInteres.totalPuntsInteres++;
     this.#id = PuntInteres.totalPuntsInteres;
     this.#pais = pais;
@@ -31,7 +31,7 @@ export class PuntInteres {
     this.#puntuacio = parseFloat(puntuacio);
   }
 
-  // Getters per accedir als atributs privats
+  // Getters to access the private attributes
   get id() {
     return this.#id;
   }
@@ -72,7 +72,7 @@ export class PuntInteres {
     return this.#puntuacio;
   }
 
-  // Setters bàsics
+  // Basic setters
   set id(novId) {
     this.#id = novId;
   }
@@ -85,7 +85,7 @@ export class PuntInteres {
     this.#ciutat = novaCiutat;
   }
 
-  // Mètode estàtic per obtenir el total d'instàncies creades
+  // Static helper that returns how many instances have been created
   static obtenirTotalElements() {
     return PuntInteres.totalPuntsInteres;
   }

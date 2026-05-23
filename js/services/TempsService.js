@@ -1,8 +1,8 @@
 import { URL_TEMPS } from "../const/constants.js";
 
-// Servei per consultar la temperatura actual d'una ubicació via Open-Meteo
+// Service to query the current weather for a location via Open-Meteo
 export class TempsService {
-  // Retorna l'objecte current_weather o null si la consulta falla
+  // Returns the current_weather object or null if the request fails
   async obtenirTempsActual(latitud, longitud) {
     const url = `${URL_TEMPS}?latitude=${latitud}&longitude=${longitud}&current_weather=true`;
     try {

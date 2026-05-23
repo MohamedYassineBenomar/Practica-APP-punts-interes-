@@ -1,4 +1,4 @@
-/* Reset bàsic i tipografia general */
+/* Basic reset and global typography */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -29,7 +29,7 @@ body {
   color: var(--color-text);
 }
 
-/* Capçalera amb el títol, la bandera del país i la temperatura */
+/* Header with title, country flag and temperature */
 .capcalera {
   display: flex;
   align-items: center;
@@ -78,7 +78,7 @@ body {
   color: var(--color-text-suau);
 }
 
-/* Layout principal: llista a l'esquerra, mapa a la dreta */
+/* Main layout: list on the left, map on the right */
 .container {
   display: grid;
   grid-template-columns: minmax(320px, 420px) 1fr;
@@ -112,7 +112,7 @@ body {
   min-height: 400px;
 }
 
-/* Zona de drag & drop */
+/* Drag & drop zone */
 .dropZone {
   border: 2px dashed var(--color-primari);
   border-radius: var(--radi);
@@ -133,7 +133,7 @@ body {
   font-weight: 600;
 }
 
-/* Missatges (errors, info) */
+/* Status messages (errors, info) */
 .missatge {
   font-size: 14px;
   min-height: 18px;
@@ -148,7 +148,7 @@ body {
   color: var(--color-primari);
 }
 
-/* Formulari de filtres */
+/* Filters form */
 .filter-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -190,7 +190,7 @@ body {
   background-color: var(--color-primari-fosc);
 }
 
-/* Llista de punts */
+/* List of points */
 .llista-punts {
   display: flex;
   flex-direction: column;
@@ -307,7 +307,7 @@ body {
   border-top: 1px solid var(--color-vora);
 }
 
-/* Adaptació per a pantalles petites */
+/* Responsive tweaks for small screens */
 @media (max-width: 900px) {
   .container {
     grid-template-columns: 1fr;

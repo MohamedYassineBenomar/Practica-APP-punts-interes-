@@ -1,7 +1,7 @@
 import { PuntInteres } from "./PuntInteres.js";
 
-// Espai obert (plaça, parc...) que hereta de PuntInteres
-// No té atributs propis: és un punt d'interès sense preu ni horari
+// Open space (square, park...) — inherits from PuntInteres.
+// Has no extra attributes: it is a point of interest without price or schedule.
 export class Espai extends PuntInteres {
   constructor(pais, codi, ciutat, nom, direccio, tipus, latitud, longitud, puntuacio) {
     super(pais, codi, ciutat, nom, direccio, tipus, latitud, longitud, puntuacio);

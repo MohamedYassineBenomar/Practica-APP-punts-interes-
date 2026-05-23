@@ -1,7 +1,7 @@
 import { PuntInteres } from "./PuntInteres.js";
 import { IVA } from "../const/constants.js";
 
-// Museu que hereta de PuntInteres, amb descripció i preu
+// Museum — inherits from PuntInteres, adds description and price
 export class Museu extends PuntInteres {
   #horaris;
   #preu;
@@ -33,7 +33,7 @@ export class Museu extends PuntInteres {
     return this.#descripcio;
   }
 
-  // Calcula el preu amb IVA segons el codi del país (mateixa regla que Atraccio)
+  // Returns the price with VAT (same rule as Atraccio)
   preuIva() {
     if (this.#preu === 0) {
       return "Entrada gratuïta";

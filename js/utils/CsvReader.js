@@ -2,12 +2,12 @@ import { Atraccio } from "../models/Atraccio.js";
 import { Museu } from "../models/Museu.js";
 import { Espai } from "../models/Espai.js";
 
-// Separador de columnes utilitzat als CSVs
+// Column separator used in the CSV files
 const SEPARADOR = ";";
 
-// Utilitat per llegir un fitxer CSV i convertir-lo en instàncies de PuntInteres
+// Helper that reads a CSV file and turns it into PuntInteres instances
 export class CsvReader {
-  // Llegeix el contingut del File com a text amb FileReader
+  // Reads the File contents as text using FileReader
   llegirFitxer(fitxer) {
     return new Promise((resolve, reject) => {
       const lector = new FileReader();
@@ -21,13 +21,13 @@ export class CsvReader {
     });
   }
 
-  // Converteix el contingut del CSV en una llista d'objectes (per nom de columna)
+  // Parses the CSV content into a list of plain objects keyed by column name
   parsejar(contingut) {
     const linies = contingut.split("\n");
     if (linies.length < 2) {
       return [];
     }
-    // Primera línia: capçaleres normalitzades a minúscules
+    // First line: headers normalised to lowercase
     const capcaleres = linies[0].trim().split(SEPARADOR).map((c) => c.trim().toLowerCase());
     const registres = [];
     for (let i = 1; i < linies.length; i++) {
@@ -45,13 +45,13 @@ export class CsvReader {
     return registres;
   }
 
-  // Construeix la instància concreta segons el camp "tipus" (normalitzat)
+  // Builds the right subclass instance based on the (normalised) "tipus" field
   crearInstancia(registre) {
     const pais = registre["pais"] || "";
     const codi = registre["codi"] || "";
     const ciutat = registre["ciutat"] || "";
     const nom = registre["nom"] || "";
-    // Algunes capçaleres poden venir amb accent ("direcció") o sense
+    // Header may come with or without accent ("direcció" / "direccio")
     const direccio = registre["direccio"] || registre["direcció"] || "";
     const tipusOriginal = (registre["tipus"] || "").toLowerCase();
     const latitud = registre["latitud"] || "0";
@@ -61,7 +61,7 @@ export class CsvReader {
     const preu = registre["preu"] || "0";
     const moneda = registre["moneda"] || "";
     const descripcio = registre["descripcio"] || "";
-    // L'edat pot no existir en alguns CSVs: per defecte 0 (apte tot públic)
+    // The age column may be missing in some CSVs: default to 0 (all audiences)
     const edat = registre["edat"] || "0";
 
     if (tipusOriginal === "atraccio" || tipusOriginal === "atracció") {
@@ -73,11 +73,11 @@ export class CsvReader {
     if (tipusOriginal === "espai") {
       return new Espai(pais, codi, ciutat, nom, direccio, "espai", latitud, longitud, puntuacio);
     }
-    // Tipus desconegut: el tractem com un Espai genèric per no perdre el registre
+    // Unknown type: fall back to a generic Espai so we don't drop the record
     return new Espai(pais, codi, ciutat, nom, direccio, tipusOriginal, latitud, longitud, puntuacio);
   }
 
-  // Procés complet: llegir, parsejar i crear instàncies
+  // Full pipeline: read the file, parse it and instantiate the points
   async carregarPunts(fitxer) {
     const contingut = await this.llegirFitxer(fitxer);
     const registres = this.parsejar(contingut);

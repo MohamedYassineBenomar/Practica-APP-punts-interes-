@@ -7,14 +7,14 @@ import { CsvReader } from "./utils/CsvReader.js";
 import { Components } from "./utils/Components.js";
 import { LAT_DEFECTE, LONG_DEFECTE, MSG_FITXER_NO_CSV, MSG_CONFIRM_ELIMINAR } from "./const/constants.js";
 
-// Instàncies globals (una sola per pàgina)
+// Global instances (single per page)
 const mapa = new Mapa("mapa");
 const llista = new LlistaPuntsInteres();
 const lectorCsv = new CsvReader();
 const paisService = new PaisService();
 const tempsService = new TempsService();
 
-// Referències al DOM amb el sufix Obj segons la convenció
+// DOM references — variables holding a DOM node carry the "Obj" suffix
 const dropZoneObj = document.querySelector(".dropZone");
 const dropZoneTextObj = document.querySelector(".dropZone-text");
 const llistaObj = document.querySelector(".llista-punts");
@@ -27,13 +27,13 @@ const infoPaisObj = document.querySelector(".info-pais-container");
 const tempsObj = document.querySelector(".info-temps");
 const missatgeObj = document.querySelector(".missatge");
 
-// Inicialització: geolocalització + listeners de la interfície
+// Bootstrap: geolocation + UI listeners
 const inicialitzar = () => {
   obtenirGeolocalitzacio();
   registrarListeners();
 };
 
-// Demana la posició actual a l'usuari i pinta el marcador "Estàs aquí"
+// Asks for the user's location and drops the "You are here" marker
 const obtenirGeolocalitzacio = () => {
   if (!navigator.geolocation) {
     mapa.mostrarEstasAqui(LAT_DEFECTE, LONG_DEFECTE);
@@ -48,15 +48,15 @@ const obtenirGeolocalitzacio = () => {
       mapa.mostrarEstasAqui(lat, long);
     },
     () => {
-      // Si l'usuari denega la geolocalització o hi ha error, valors per defecte
+      // The user denied geolocation or an error happened: fall back to defaults
       mapa.mostrarEstasAqui(LAT_DEFECTE, LONG_DEFECTE);
     }
   );
 };
 
-// Registra els listeners del drop, dels filtres i del botó de netejar
+// Registers the drop, filter and "clear" listeners
 const registrarListeners = () => {
-  // Drag & drop del fitxer CSV
+  // CSV drag & drop zone
   dropZoneObj.addEventListener("dragover", (event) => {
     event.preventDefault();
     dropZoneObj.classList.add("dropZone-actiu");
@@ -73,7 +73,7 @@ const registrarListeners = () => {
     }
   });
 
-  // Filtres
+  // Filters
   selectTipusObj.addEventListener("change", (event) => {
     llista.filtreTipus = event.target.value;
     renderitzar();
@@ -87,7 +87,7 @@ const registrarListeners = () => {
     renderitzar();
   });
 
-  // Botó per buidar tota la llista
+  // Button that wipes the entire list
   btnNetejarObj.addEventListener("click", () => {
     llista.buidar();
     PuntInteres.totalPuntsInteres = 0;
@@ -99,7 +99,7 @@ const registrarListeners = () => {
   });
 };
 
-// Comprova que el fitxer sigui csv i en carrega els punts
+// Validates the file is a CSV and triggers the loading pipeline
 const gestionarFitxer = async (fitxer) => {
   if (!fitxer.name.toLowerCase().endsWith(".csv")) {
     mostrarMissatge(MSG_FITXER_NO_CSV, "error");
@@ -122,9 +122,9 @@ const gestionarFitxer = async (fitxer) => {
   }
 };
 
-// Pinta la llista de punts i sincronitza el mapa amb els filtres actius
+// Renders the list of points and keeps the map in sync with the active filters
 const renderitzar = () => {
-  // Buidem la llista del DOM
+  // Clear the current list in the DOM
   while (llistaObj.firstChild) {
     llistaObj.removeChild(llistaObj.firstChild);
   }
@@ -133,18 +133,18 @@ const renderitzar = () => {
     const targeta = Components.crearTargetaPunt(punt, eliminarPunt);
     llistaObj.appendChild(targeta);
   });
-  // Actualitzem el total (basat en la llista completa, no en la filtrada)
+  // Update the total using the full list (not the filtered one)
   totalObj.textContent = `Total punts d'interès: ${llista.total()}`;
-  // Refresquem el select de tipus per si han aparegut tipus nous
+  // Refresh the type select in case new types appeared
   Components.omplirSelectTipus(selectTipusObj, llista.obtenirTipusUnics());
   selectTipusObj.value = llista.filtreTipus;
-  // Refresquem el mapa amb els punts visibles
+  // Refresh the map with the currently visible points
   mapa.borrarPunts();
   mapa.mostrarEstasAqui(mapa.latInit, mapa.longInit);
   mapa.mostrarPunts(visibles);
 };
 
-// Elimina un punt amb confirmació prèvia
+// Deletes a point after asking for confirmation
 const eliminarPunt = (id) => {
   if (confirm(MSG_CONFIRM_ELIMINAR)) {
     llista.eliminarPerId(id);
@@ -152,7 +152,7 @@ const eliminarPunt = (id) => {
   }
 };
 
-// Consulta REST Countries i mostra bandera + ciutat
+// Queries REST Countries and renders flag + city in the header
 const carregarInfoPais = async (codi, ciutat) => {
   netejarCapcalera();
   const dades = await paisService.obtenirDadesPais(codi);
@@ -166,7 +166,7 @@ const carregarInfoPais = async (codi, ciutat) => {
   infoPaisObj.appendChild(bloc);
 };
 
-// Consulta Open-Meteo i mostra la temperatura actual
+// Queries Open-Meteo and renders the current temperature
 const carregarTemps = async (latitud, longitud) => {
   tempsObj.textContent = "";
   const temps = await tempsService.obtenirTempsActual(latitud, longitud);
@@ -176,7 +176,7 @@ const carregarTemps = async (latitud, longitud) => {
   tempsObj.textContent = `Temperatura actual: ${temps.temperature}°C`;
 };
 
-// Mostra un missatge a l'usuari amb classe d'estat (info/error)
+// Shows a message to the user with the matching status class (info / error)
 const mostrarMissatge = (text, tipus) => {
   missatgeObj.textContent = text;
   missatgeObj.classList.remove("missatge-info", "missatge-error");
@@ -195,5 +195,5 @@ const netejarCapcalera = () => {
   tempsObj.textContent = "";
 };
 
-// Engeguem l'aplicació quan el DOM estigui llest
+// Boot the app when the DOM is ready
 document.addEventListener("DOMContentLoaded", inicialitzar);

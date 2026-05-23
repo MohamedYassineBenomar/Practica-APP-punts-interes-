@@ -1,6 +1,6 @@
-// Encapsula la col·lecció de punts d'interès i totes les operacions
-// (afegir, eliminar, filtrar, ordenar...). Manté la llista original
-// i una llista "visible" amb els filtres aplicats.
+// Encapsulates the collection of points of interest and all the operations
+// (add, remove, filter, sort...). It keeps the original list and exposes a
+// "visible" view that reflects the active filters and the sort order.
 export class LlistaPuntsInteres {
   #punts;
   #filtreTipus;
@@ -14,7 +14,7 @@ export class LlistaPuntsInteres {
     this.#ordre = "asc";
   }
 
-  // Getters bàsics
+  // Basic getters
   get punts() {
     return this.#punts;
   }
@@ -31,7 +31,7 @@ export class LlistaPuntsInteres {
     return this.#ordre;
   }
 
-  // Setters dels filtres
+  // Filter setters
   set filtreTipus(nouTipus) {
     this.#filtreTipus = nouTipus;
   }
@@ -44,32 +44,32 @@ export class LlistaPuntsInteres {
     this.#ordre = nouOrdre;
   }
 
-  // Afegeix un punt a la col·lecció
+  // Adds a point to the collection
   afegir(punt) {
     this.#punts.push(punt);
   }
 
-  // Substitueix tota la col·lecció per una nova llista
+  // Replaces the whole collection with a new list
   carregar(nousPunts) {
     this.#punts = nousPunts;
   }
 
-  // Elimina un punt pel seu identificador
+  // Removes the point with the given id
   eliminarPerId(id) {
     this.#punts = this.#punts.filter((punt) => punt.id !== id);
   }
 
-  // Buida tota la llista
+  // Empties the list
   buidar() {
     this.#punts = [];
   }
 
-  // Retorna el total d'elements de la llista (sense filtres)
+  // Returns the total number of elements (ignoring filters)
   total() {
     return this.#punts.length;
   }
 
-  // Retorna el conjunt de tipus diferents presents a la llista
+  // Returns the set of distinct types present in the list
   obtenirTipusUnics() {
     const tipusSet = new Set();
     this.#punts.forEach((punt) => {
@@ -78,23 +78,23 @@ export class LlistaPuntsInteres {
     return tipusSet;
   }
 
-  // Retorna la llista filtrada i ordenada segons els filtres actius
+  // Returns the list filtered + sorted according to the current settings
   obtenirVisibles() {
     let resultat = this.#punts.slice();
 
-    // Filtrem per tipus si no és "tots"
+    // Filter by type when it is not "tots"
     if (this.#filtreTipus !== "tots") {
       resultat = resultat.filter((punt) => punt.tipus === this.#filtreTipus);
     }
 
-    // Filtrem per nom (cerca per contingut, no sensible a majúscules)
+    // Filter by name (substring search, case-insensitive)
     if (this.#filtreNom !== "") {
       resultat = resultat.filter((punt) => {
         return punt.nom.toLowerCase().includes(this.#filtreNom);
       });
     }
 
-    // Ordenem alfabèticament pel nom
+    // Sort alphabetically by name (asc / desc)
     resultat.sort((a, b) => {
       const nomA = a.nom.toLowerCase();
       const nomB = b.nom.toLowerCase();

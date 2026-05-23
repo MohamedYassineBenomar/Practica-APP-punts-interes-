@@ -1,8 +1,8 @@
 import { URL_PAIS } from "../const/constants.js";
 
-// Servei per consultar informació d'un país a través de REST Countries
+// Service to query country information from the REST Countries API
 export class PaisService {
-  // Retorna les dades crues del país segons el codi ISO (ESP, GBR...)
+  // Returns the raw country data for a given ISO code (ESP, GBR...)
   async obtenirDadesPais(codi) {
     const url = `${URL_PAIS}${codi}`;
     try {
