@@ -38,11 +38,11 @@ export class Mapa {
     this.#map.setView([lat, long], zoom);
   }
 
-  // Shows the "You are here" marker with an open popup
+  // Shows the "You are here" marker with an open popup.
+  // Does not recenter the map — call centrar() explicitly when needed.
   mostrarEstasAqui(lat, long) {
     const marker = L.marker([lat, long]).addTo(this.#map);
     marker.bindPopup("<b>Estàs aquí</b>").openPopup();
-    this.centrar(lat, long);
   }
 
   // Shows a single point on the map with a popup (name, address, rating)

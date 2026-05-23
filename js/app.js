@@ -33,10 +33,12 @@ const inicialitzar = () => {
   registrarListeners();
 };
 
-// Asks for the user's location and drops the "You are here" marker
+// Asks for the user's location and drops the "You are here" marker.
+// Only this initial bootstrap recenters the map; later re-renders never do.
 const obtenirGeolocalitzacio = () => {
   if (!navigator.geolocation) {
     mapa.mostrarEstasAqui(LAT_DEFECTE, LONG_DEFECTE);
+    mapa.centrar(LAT_DEFECTE, LONG_DEFECTE);
     return;
   }
   navigator.geolocation.getCurrentPosition(
@@ -46,10 +48,12 @@ const obtenirGeolocalitzacio = () => {
       mapa.latInit = lat;
       mapa.longInit = long;
       mapa.mostrarEstasAqui(lat, long);
+      mapa.centrar(lat, long);
     },
     () => {
       // The user denied geolocation or an error happened: fall back to defaults
       mapa.mostrarEstasAqui(LAT_DEFECTE, LONG_DEFECTE);
+      mapa.centrar(LAT_DEFECTE, LONG_DEFECTE);
     }
   );
 };
