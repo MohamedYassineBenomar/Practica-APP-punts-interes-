@@ -1,21 +1,21 @@
-# APP Punts d'Interès
+# APP Puntos de Interés
 
 |            |                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------ |
-| Live demo  | https://mohamedyassinebenomar.github.io/Practica-APP-punts-interes-/                             |
-| Video demo | https://drive.google.com/file/d/1muP_xKJuwan3YOZL4kAVxrgY-f83Oduk/view?usp=sharing               |
+| Demo live  | https://mohamedyassinebenomar.github.io/Practica-APP-punts-interes-/                             |
+| Vídeo demo | https://drive.google.com/file/d/1muP_xKJuwan3YOZL4kAVxrgY-f83Oduk/view?usp=sharing               |
 
-Aplicació web (JavaScript vanilla amb ES Modules) per llistar i mostrar punts
-d'interès d'una ciutat sobre un mapa de Leaflet a partir d'un fitxer CSV.
+Aplicación web (JavaScript vanilla con ES Modules) para listar y mostrar los
+puntos de interés de una ciudad sobre un mapa de Leaflet a partir de un fichero CSV.
 
-## Funcionalitats
+## Funcionalidades
 
-- Arrossega un fitxer `.csv` a la zona de drop i es carrega la llista de punts.
-- Mostra la bandera del país (REST Countries) i la temperatura actual (Open-Meteo).
-- Pinta tots els punts al mapa amb popup (nom, adreça, puntuació).
-- Marcador d'**Estàs aquí** via Geolocation API.
-- Filtres per **tipus**, cerca per **nom**, ordre **asc/desc** i botó per netejar.
-- Eliminació individual amb confirmació; el total i el mapa s'actualitzen.
+- Arrastra un fichero `.csv` a la zona de drop y se carga la lista de puntos.
+- Muestra la bandera del país (REST Countries) y la temperatura actual (Open-Meteo).
+- Pinta todos los puntos en el mapa con popup (nombre, dirección, puntuación).
+- Marcador de **Estás aquí** mediante la Geolocation API.
+- Filtros por **tipo**, búsqueda por **nombre**, orden **asc/desc** y botón para limpiar.
+- Eliminación individual con confirmación; el total y el mapa se actualizan.
 
 ## Estructura
 
@@ -23,7 +23,7 @@ d'interès d'una ciutat sobre un mapa de Leaflet a partir d'un fitxer CSV.
 /
 ├── index.html
 ├── style/style.css
-├── data/                            // CSVs de mostra (Barcelona i Londres)
+├── data/                            // CSVs de muestra (Barcelona y Londres)
 └── js/
     ├── app.js
     ├── const/constants.js
@@ -42,26 +42,26 @@ d'interès d'una ciutat sobre un mapa de Leaflet a partir d'un fitxer CSV.
         └── Components.js
 ```
 
-## Com executar-ho
+## Cómo ejecutarlo
 
-Cal servir l'aplicació amb un servidor estàtic (els ES Modules no es poden carregar
-amb `file://`).
+Hay que servir la aplicación con un servidor estático (los ES Modules no se pueden
+cargar con `file://`).
 
 ```bash
-# Opció 1: Python 3
+# Opción 1: Python 3
 python3 -m http.server 8000
 
-# Opció 2: Node (npx)
+# Opción 2: Node (npx)
 npx http-server -p 8000
 
-# Opció 3: Live Server (VSCode)
+# Opción 3: Live Server (VSCode)
 ```
 
-Després obre `http://localhost:8000` i arrossega un dels CSVs de la carpeta `data/`.
+Después abre `http://localhost:8000` y arrastra uno de los CSVs de la carpeta `data/`.
 
-## Format dels CSVs
+## Formato de los CSVs
 
 - Separador: `;`
-- Capçaleres: `pais;codi;ciutat;tipus;nom;direcció;latitud;longitud;horaris;preu;descripcio;puntuacio;edat;moneda`
-- El camp `edat` pot ser opcional (per ex. al CSV de Londres).
-- El camp `tipus` admet variacions de majúscules/minúscules (`Atraccio`/`atraccio`).
+- Cabeceras: `pais;codi;ciutat;tipus;nom;direcció;latitud;longitud;horaris;preu;descripcio;puntuacio;edat;moneda`
+- El campo `edat` puede ser opcional (por ejemplo, en el CSV de Londres).
+- El campo `tipus` admite variaciones de mayúsculas/minúsculas (`Atraccio`/`atraccio`).
