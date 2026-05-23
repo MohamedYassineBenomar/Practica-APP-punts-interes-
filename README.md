@@ -1,6 +1,6 @@
 # APP Punts de Interés
 
-|            |                                                                                                  |
+
 | ---------- | ------------------------------------------------------------------------------------------------ |
 | Demo live  | https://mohamedyassinebenomar.github.io/Practica-APP-punts-interes-/                             |
 | Vídeo demo | https://drive.google.com/file/d/1muP_xKJuwan3YOZL4kAVxrgY-f83Oduk/view?usp=sharing               |
