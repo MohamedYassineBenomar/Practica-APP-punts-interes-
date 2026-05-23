@@ -38,6 +38,22 @@ export class Mapa {
     this.#map.setView([lat, long], zoom);
   }
 
+  // Returns the current centre coordinates (LatLng) of the map
+  obtenirCentre() {
+    return this.#map.getCenter();
+  }
+
+  // Returns the current zoom level of the map
+  obtenirZoom() {
+    return this.#map.getZoom();
+  }
+
+  // Forces the map view back to a previously snapshotted centre + zoom
+  // (used to keep the view stable across marker re-renders)
+  fixarVista(centre, zoom) {
+    this.#map.setView(centre, zoom, { animate: false });
+  }
+
   // Shows the "You are here" marker (popup only opens on click).
   // We avoid openPopup() because Leaflet auto-pans the map to make an
   // opening popup visible, which would re-snap the view on every render.

@@ -138,8 +138,13 @@ const reiniciarApp = () => {
   renderitzar();
 };
 
-// Renders the list of points and keeps the map in sync with the active filters
+// Renders the list of points and keeps the map in sync with the active filters.
+// We snapshot the map view before touching markers and force it back at the
+// end, so filters / sorting / deletes never shift the user's current view.
 const renderitzar = () => {
+  const centreActual = mapa.obtenirCentre();
+  const zoomActual = mapa.obtenirZoom();
+
   // Clear the current list in the DOM
   while (llistaObj.firstChild) {
     llistaObj.removeChild(llistaObj.firstChild);
@@ -158,6 +163,9 @@ const renderitzar = () => {
   mapa.borrarPunts();
   mapa.mostrarEstasAqui(mapa.latInit, mapa.longInit);
   mapa.mostrarPunts(visibles);
+
+  // Restore the exact view we had before any marker churn
+  mapa.fixarVista(centreActual, zoomActual);
 };
 
 // Deletes a point after asking for confirmation
