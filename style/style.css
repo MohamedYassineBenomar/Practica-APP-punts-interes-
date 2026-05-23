@@ -1,0 +1,320 @@
+/* Reset bàsic i tipografia general */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-fons: #f4f5f7;
+  --color-card: #ffffff;
+  --color-text: #1f2933;
+  --color-text-suau: #52606d;
+  --color-primari: #2563eb;
+  --color-primari-fosc: #1d4ed8;
+  --color-vora: #d8dee4;
+  --color-error: #dc2626;
+  --color-espai: #16a34a;
+  --color-atraccio: #ea580c;
+  --color-museu: #7c3aed;
+  --radi: 10px;
+  --ombra: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background-color: var(--color-fons);
+  color: var(--color-text);
+}
+
+/* Capçalera amb el títol, la bandera del país i la temperatura */
+.capcalera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  background-color: var(--color-card);
+  border-bottom: 1px solid var(--color-vora);
+  box-shadow: var(--ombra);
+  flex-wrap: wrap;
+}
+
+.titol-app {
+  font-size: 22px;
+  color: var(--color-primari-fosc);
+}
+
+.info-pais-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 28px;
+}
+
+.info-pais {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.bandera {
+  width: 36px;
+  height: 24px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--color-vora);
+}
+
+.nom-ciutat {
+  font-weight: 600;
+}
+
+.info-temps {
+  font-size: 15px;
+  color: var(--color-text-suau);
+}
+
+/* Layout principal: llista a l'esquerra, mapa a la dreta */
+.container {
+  display: grid;
+  grid-template-columns: minmax(320px, 420px) 1fr;
+  gap: 16px;
+  padding: 16px;
+  height: calc(100vh - 80px);
+}
+
+.container-llista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: var(--color-card);
+  border-radius: var(--radi);
+  padding: 16px;
+  box-shadow: var(--ombra);
+  overflow: hidden;
+}
+
+.container-map {
+  background-color: var(--color-card);
+  border-radius: var(--radi);
+  padding: 8px;
+  box-shadow: var(--ombra);
+}
+
+#mapa {
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--radi) - 2px);
+  min-height: 400px;
+}
+
+/* Zona de drag & drop */
+.dropZone {
+  border: 2px dashed var(--color-primari);
+  border-radius: var(--radi);
+  padding: 24px;
+  text-align: center;
+  background-color: #eff6ff;
+  color: var(--color-primari-fosc);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.dropZone-actiu {
+  background-color: #dbeafe;
+  border-color: var(--color-primari-fosc);
+}
+
+.dropZone-text {
+  font-weight: 600;
+}
+
+/* Missatges (errors, info) */
+.missatge {
+  font-size: 14px;
+  min-height: 18px;
+}
+
+.missatge-error {
+  color: var(--color-error);
+  font-weight: 600;
+}
+
+.missatge-info {
+  color: var(--color-primari);
+}
+
+/* Formulari de filtres */
+.filter-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: end;
+}
+
+.camp {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--color-text-suau);
+}
+
+.camp select,
+.camp input {
+  padding: 8px 10px;
+  border: 1px solid var(--color-vora);
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: var(--color-card);
+  color: var(--color-text);
+}
+
+.btn-netejar {
+  grid-column: 1 / -1;
+  padding: 9px 14px;
+  background-color: var(--color-primari);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-netejar:hover {
+  background-color: var(--color-primari-fosc);
+}
+
+/* Llista de punts */
+.llista-punts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  padding-right: 4px;
+  flex: 1;
+}
+
+.punt-item {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-vora);
+  border-left: 6px solid var(--color-vora);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.punt-item.espai {
+  border-left-color: var(--color-espai);
+}
+
+.punt-item.atraccio {
+  border-left-color: var(--color-atraccio);
+}
+
+.punt-item.museu {
+  border-left-color: var(--color-museu);
+}
+
+.punt-capcalera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.punt-titol {
+  font-size: 16px;
+  color: var(--color-text);
+}
+
+.punt-direccio {
+  font-size: 13px;
+  color: var(--color-text-suau);
+}
+
+.punt-puntuacio {
+  font-size: 13px;
+  color: var(--color-text-suau);
+}
+
+.punt-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.info-tag {
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  background-color: #f1f5f9;
+  color: var(--color-text);
+}
+
+.tag-tipus {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.espai .tag-tipus {
+  background-color: var(--color-espai);
+}
+
+.atraccio .tag-tipus {
+  background-color: var(--color-atraccio);
+}
+
+.museu .tag-tipus {
+  background-color: var(--color-museu);
+}
+
+.btn-eliminar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background-color: #fee2e2;
+  color: var(--color-error);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+
+.btn-eliminar:hover {
+  background-color: var(--color-error);
+  color: #ffffff;
+}
+
+.total-punts {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-suau);
+  text-align: right;
+  padding-top: 6px;
+  border-top: 1px solid var(--color-vora);
+}
+
+/* Adaptació per a pantalles petites */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  #mapa {
+    min-height: 320px;
+  }
+}

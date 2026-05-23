@@ -1,0 +1,11 @@
+pais;codi;ciutat;tipus;nom;direcció;latitud;longitud;horaris;preu;descripcio;puntuacio;moneda
+United Kingdom;GBR;London;atraccio;London Eye;Riverside Building, County Hall;51.5033;-0.1196;10:00-20:30;32;;4.5;£
+United Kingdom;GBR;London;Museu;British Museum;Great Russell St;51.5194;-0.1270;10:00-17:30;0;Història i cultura mundial;4.8;£
+United Kingdom;GBR;London;atraccio;Tower of London;St Katharine's & Wapping;51.5081;-0.0759;09:00-17:30;33.6;;4.6;£
+United Kingdom;GBR;London;Museu;Natural History Museum;Cromwell Road;51.4967;-0.1764;10:00-17:50;0;Història natural i dinosaures;4.7;£
+United Kingdom;GBR;London;espai;Hyde Park;Hyde Park;51.5074;-0.1657;05:00-00:00;0;;4.7;£
+United Kingdom;GBR;London;Espai;Regent's Park;Chester Rd;51.5313;-0.1570;05:00-21:00;0;;4.7;£
+United Kingdom;GBR;London;atraccio;Madame Tussauds;Marylebone Rd;51.5230;-0.1547;10:00-17:00;42;;4.3;£
+United Kingdom;GBR;London;museu;Tate Modern;Bankside;51.5076;-0.0994;10:00-18:00;0;Art modern i contemporani;4.6;£
+United Kingdom;GBR;London;espai;St James's Park;St James's Park;51.5025;-0.1340;05:00-00:00;0;;4.7;£
+United Kingdom;GBR;London;atraccio;The Shard;32 London Bridge St;51.5045;-0.0865;10:00-22:00;28;;4.5;£

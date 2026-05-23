@@ -1,0 +1,11 @@
+pais;codi;ciutat;tipus;nom;direcció;latitud;longitud;horaris;preu;descripcio;puntuacio;edat;moneda
+Espanya;ESP;Barcelona;Atraccio;Tibidabo;Plaça Tibidabo 3-4;41.4226;2.1188;10:00-20:00;28.5;;4.5;6;€
+Espanya;ESP;Barcelona;atraccio;PortAventura;Av. Pere Molas km 2;41.0875;1.1547;10:00-19:00;55;;4.6;6;€
+Espanya;ESP;Barcelona;Museu;MNAC;Palau Nacional, Parc de Montjuïc;41.3686;2.1535;10:00-18:00;12;Museu Nacional d'Art de Catalunya;4.6;;€
+Espanya;ESP;Barcelona;museu;Museu Picasso;Carrer Montcada 15-23;41.3853;2.1810;10:00-20:00;14;Obra del pintor Pablo Picasso;4.5;;€
+Espanya;ESP;Barcelona;Espai;Park Güell;Carrer d'Olot 5;41.4145;2.1527;08:00-21:30;0;;4.7;;€
+Espanya;ESP;Barcelona;espai;Parc de la Ciutadella;Passeig de Picasso 21;41.3879;2.1869;10:00-22:30;0;;4.6;;€
+Espanya;ESP;Barcelona;atraccio;Sagrada Família;Carrer de Mallorca 401;41.4036;2.1744;09:00-18:00;26;;4.8;0;€
+Espanya;ESP;Barcelona;Museu;CosmoCaixa;Carrer d'Isaac Newton 26;41.4099;2.1349;10:00-20:00;6;Museu de la ciència;4.6;;€
+Espanya;ESP;Barcelona;espai;Plaça Catalunya;Plaça de Catalunya;41.3870;2.1700;00:00-23:59;0;;4.4;;€
+Espanya;ESP;Barcelona;atraccio;Casino Barcelona;C. de la Marina 19-21;41.3870;2.1972;10:00-05:00;5;;3.9;18;€

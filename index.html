@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APP Punts d'Interès</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style/style.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  </head>
+  <body>
+    <header class="capcalera">
+      <h1 class="titol-app">Punts d'Interès</h1>
+      <div class="info-pais-container"></div>
+      <p class="info-temps"></p>
+    </header>
+
+    <main class="container">
+      <section class="container-llista">
+        <div class="dropZone">
+          <p class="dropZone-text">Arrossega aquí el fitxer CSV</p>
+        </div>
+
+        <p class="missatge"></p>
+
+        <form class="filter-form" onsubmit="return false;">
+          <label class="camp">
+            <span>Tipus</span>
+            <select class="filtre-tipus">
+              <option value="tots">Tots</option>
+            </select>
+          </label>
+
+          <label class="camp">
+            <span>Nom</span>
+            <input type="text" class="filtre-nom" placeholder="Cerca per nom..." />
+          </label>
+
+          <label class="camp">
+            <span>Ordre</span>
+            <select class="filtre-ordre">
+              <option value="asc">A → Z</option>
+              <option value="desc">Z → A</option>
+            </select>
+          </label>
+
+          <button type="button" class="btn-netejar">Netejar</button>
+        </form>
+
+        <div class="llista-punts"></div>
+
+        <p class="total-punts">Total punts d'interès: 0</p>
+      </section>
+
+      <section class="container-map">
+        <div id="mapa"></div>
+      </section>
+    </main>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
