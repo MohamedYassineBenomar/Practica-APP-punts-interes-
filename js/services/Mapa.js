@@ -38,11 +38,12 @@ export class Mapa {
     this.#map.setView([lat, long], zoom);
   }
 
-  // Shows the "You are here" marker with an open popup.
-  // Does not recenter the map — call centrar() explicitly when needed.
+  // Shows the "You are here" marker (popup only opens on click).
+  // We avoid openPopup() because Leaflet auto-pans the map to make an
+  // opening popup visible, which would re-snap the view on every render.
   mostrarEstasAqui(lat, long) {
     const marker = L.marker([lat, long]).addTo(this.#map);
-    marker.bindPopup("<b>Estàs aquí</b>").openPopup();
+    marker.bindPopup("<b>Estàs aquí</b>", { autoPan: false });
   }
 
   // Shows a single point on the map with a popup (name, address, rating)
