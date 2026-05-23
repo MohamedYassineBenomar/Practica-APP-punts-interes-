@@ -1,5 +1,10 @@
 # APP Punts d'Interès
 
+|            |                                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------------------ |
+| Live demo  | https://mohamedyassinebenomar.github.io/Practica-APP-punts-interes-/                             |
+| Video demo | _coming soon_                                                                                    |
+
 Aplicació web (JavaScript vanilla amb ES Modules) per llistar i mostrar punts
 d'interès d'una ciutat sobre un mapa de Leaflet a partir d'un fitxer CSV.
 
