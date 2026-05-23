@@ -103,7 +103,8 @@ const registrarListeners = () => {
   });
 };
 
-// Validates the file is a CSV and triggers the loading pipeline
+// Validates the file is a CSV and triggers the loading pipeline.
+// Resets every filter and the id counter so the new dataset starts clean.
 const gestionarFitxer = async (fitxer) => {
   if (!fitxer.name.toLowerCase().endsWith(".csv")) {
     mostrarMissatge(MSG_FITXER_NO_CSV, "error");
@@ -111,6 +112,7 @@ const gestionarFitxer = async (fitxer) => {
   }
   netejarMissatge();
   try {
+    reiniciarEstat();
     const punts = await lectorCsv.carregarPunts(fitxer);
     llista.carregar(punts);
     renderitzar();
@@ -124,6 +126,17 @@ const gestionarFitxer = async (fitxer) => {
     console.error("Error gestionant el fitxer", error);
     mostrarMissatge("Error llegint el fitxer", "error");
   }
+};
+
+// Wipes the filter state (data + UI inputs) and resets the id counter.
+// Used whenever a fresh CSV is loaded so stale filters can't hide the new data.
+const reiniciarEstat = () => {
+  PuntInteres.totalPuntsInteres = 0;
+  llista.filtreTipus = "tots";
+  llista.filtreNom = "";
+  llista.ordre = "asc";
+  txbNomObj.value = "";
+  selectOrdreObj.value = "asc";
 };
 
 // Renders the list of points and keeps the map in sync with the active filters
