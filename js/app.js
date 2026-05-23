@@ -91,28 +91,22 @@ const registrarListeners = () => {
     renderitzar();
   });
 
-  // Button that wipes the entire list
+  // Button that wipes the entire list and returns the app to initial state
   btnNetejarObj.addEventListener("click", () => {
-    llista.buidar();
-    PuntInteres.totalPuntsInteres = 0;
-    renderitzar();
-    mapa.borrarPunts();
-    mapa.mostrarEstasAqui(mapa.latInit, mapa.longInit);
-    netejarMissatge();
-    netejarCapcalera();
+    reiniciarApp();
   });
 };
 
 // Validates the file is a CSV and triggers the loading pipeline.
-// Resets every filter and the id counter so the new dataset starts clean.
+// Wipes the whole app first so no stale data (points, flag, temperature,
+// filters, list, map markers) leaks into the new city.
 const gestionarFitxer = async (fitxer) => {
   if (!fitxer.name.toLowerCase().endsWith(".csv")) {
     mostrarMissatge(MSG_FITXER_NO_CSV, "error");
     return;
   }
-  netejarMissatge();
+  reiniciarApp();
   try {
-    reiniciarEstat();
     const punts = await lectorCsv.carregarPunts(fitxer);
     llista.carregar(punts);
     renderitzar();
@@ -128,15 +122,20 @@ const gestionarFitxer = async (fitxer) => {
   }
 };
 
-// Wipes the filter state (data + UI inputs) and resets the id counter.
-// Used whenever a fresh CSV is loaded so stale filters can't hide the new data.
-const reiniciarEstat = () => {
+// Returns the app to its initial post-bootstrap state:
+// empty list, default filters, no header info, map with only the
+// "Estàs aquí" marker. Used by the clear button and by every new CSV load.
+const reiniciarApp = () => {
   PuntInteres.totalPuntsInteres = 0;
+  llista.buidar();
   llista.filtreTipus = "tots";
   llista.filtreNom = "";
   llista.ordre = "asc";
   txbNomObj.value = "";
   selectOrdreObj.value = "asc";
+  netejarCapcalera();
+  netejarMissatge();
+  renderitzar();
 };
 
 // Renders the list of points and keeps the map in sync with the active filters
